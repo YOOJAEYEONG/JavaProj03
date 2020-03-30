@@ -61,10 +61,11 @@ class Puzzle {
 			e.getMessage();
 		}
 		
-		
+		//x의 초기 위치값 puzzle[i][j]
 		switch(input) {
 		case UP:
 			
+			//puzzle[checkMove(width)][checkMove(width)];
 			break;
 		case DOWN:
 			
@@ -87,14 +88,10 @@ class Puzzle {
 		}
 		
 	}
-	
-	
-	
-	
 /*
 	1	2	3			0,0		0,1		0,2
 	4	5	6			1,0		1,1		1,2
-	7	8	9			2,0		2,1		2,2
+	7	8	X			2,0		2,1		2,2
 */
 	public void setPuzzle() {
 		System.out.println("new Puzzle");
