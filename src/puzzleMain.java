@@ -45,10 +45,10 @@ class Puzzle {
 	public void scanVal() {
 		checkSwitch = true;
 		try {
-			input = System.in.read();
-			scan.nextLine();
+			input = scan.nextInt();
+			
 		} catch (Exception e) {
-			e.getMessage();
+			scan.nextLine();
 		}
 	}
 	
@@ -74,7 +74,7 @@ class Puzzle {
 		System.out.print("   ▲w		1.재시작\n");
 		System.out.print("◀a   d▶\n");
 		System.out.print("   ▼s		");
-		System.err.println("2.나가기");
+		System.err.println("2.나가기\n");
 	}
 	
 	public boolean checkMove(int index, int update) {
