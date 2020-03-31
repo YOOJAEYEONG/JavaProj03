@@ -59,21 +59,22 @@ class Puzzle {
 	}
 	
 	public void updatePuzzle() {
-		System.out.println("=================");
+		System.out.println("=======");
 		for(int i=0 ; i<=2 ; i++) {
 			for(int j=0 ; j<=2 ; j++) {
 				System.out.print(puzzle[i][j]+"  ");
 			}
 			System.out.println();
 		}
-		System.out.println("=================");
+		System.out.println("=======");
 		
 	}
 	
 	public void playGuidePrint() {
 		System.out.print("   ▲w		1.재시작\n");
 		System.out.print("◀a   d▶\n");
-		System.out.print("   ▼s		2.나가기\n");
+		System.out.print("   ▼s		");
+		System.err.println("2.나가기");
 	}
 	
 	public boolean checkMove(int index, int update) {
@@ -128,7 +129,7 @@ class Puzzle {
 			shuffle(30);
 			break;
 		case EXIT:
-			System.out.println("나가기");
+			System.err.println("나가기");
 			System.exit(0);
 			
 		default :
@@ -158,7 +159,7 @@ class Puzzle {
 	
 	public void defaultSetPuzzle() {
 		System.out.println("new Puzzle");
-		System.out.println("=============");
+		System.out.println("=======");
 		int val = 1;
 		for(int i=0 ; i<=2 ; i++) {
 			for(int j=0 ; j<=2 ; j++) {
@@ -173,7 +174,7 @@ class Puzzle {
 			}
 			System.out.println();
 		}
-		System.out.println("=============");
+		System.out.println("=======");
 	}
 	
 	
