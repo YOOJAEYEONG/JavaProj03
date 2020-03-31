@@ -15,13 +15,14 @@ class Puzzle {
 	
 	String[][] puzzle = new String[3][3];
 	Scanner scan = new Scanner(System.in);
-	int idx1, idx2, input;
-	final int UP = 119;
-	final int LEFT = 97;
-	final int DOWN = 115;
-	final int RIGHT = 100;
-	final int RESTART = 49;
-	final int EXIT = 50;
+	int idx1, idx2;
+	String input;
+	final String UP = "w";
+	final String LEFT = "a";
+	final String DOWN = "s";
+	final String RIGHT = "d";
+	final String RESTART = "r";
+	final String EXIT = "e";
 	boolean checkSwitch;
 	
 	
@@ -32,7 +33,7 @@ class Puzzle {
 	public void playGame() {
 		
 		defaultSetPuzzle();
-		shuffle(10);
+		shuffle(5);
 		do {
 			updatePuzzle();
 			playGuidePrint();
@@ -45,17 +46,17 @@ class Puzzle {
 	public void scanVal() {
 		checkSwitch = true;
 		try {
-			input = scan.nextInt();
+			input = scan.nextLine();
 			
 		} catch (Exception e) {
 			scan.nextLine();
 		}
 	}
 	
-	public void search(String value) {//X를 가진 배열의 인덱스값을 찾는다.
+	public void initializeIndex() {
 		for( idx1=0; idx1<=2; idx1++)
 			for( idx2=0; idx2<=2 ; idx2++) 
-				if(puzzle[idx1][idx2].equals(value)) return;
+				if(puzzle[idx1][idx2].equals("X")) return;
 	}
 	
 	public void updatePuzzle() {
@@ -71,54 +72,54 @@ class Puzzle {
 	}
 	
 	public void playGuidePrint() {
-		System.out.print("   ▲w		1.재시작\n");
-		System.out.print("◀a   d▶\n");
-		System.out.print("   ▼s		");
-		System.err.println("2.나가기\n");
+		System.out.print("   ▲w		r.재시작\n"
+						+"◀a   d▶		  \n"
+						+"   ▼s		e.나가기\n");
 	}
 	
 	public boolean checkMove(int index, int update) {
 		
-			if(0<=(index+update) && (index+update)<=2 )	return true;
-			else if(checkSwitch){
-				System.out.println("xxxxxxxxxx\n"
+			if(0<=(index+update) && (index+update)<=2 )	{
+				return true;
+			}
+			else if(checkSwitch==true){
+				System.out.println(
+						  "xxxxxxxxx\n"
 						+ "xx이동불가xx\n"
-						+ "xxxxxxxxxx");
+						+ "xxxxxxxxx");
 				return false;
 			}
 			else	return false;
-		
 	}
 	
 	public void run() {
 		
 		int indexChanger ;
+		initializeIndex();
+		
 		
 		
 		switch(input) {
-		case UP:	case 1:
-			search("X");
+		
+		case UP:	case "1":
 			indexChanger = -1;
 			if(!checkMove(idx1, indexChanger)) return;
 			swipe(puzzle[idx1][idx2], puzzle[idx1+indexChanger][idx2], indexChanger, UP);
 			break;
 			
-		case DOWN:	case 2:
-			search("X");
+		case DOWN:	case "2":
 			indexChanger = 1;
 			if(!checkMove(idx1, indexChanger)) return;
 			swipe(puzzle[idx1][idx2], puzzle[idx1+indexChanger][idx2], indexChanger, DOWN);
 			break;
 			
-		case LEFT:	case 3:
-			search("X");
+		case LEFT:	case "3":
 			indexChanger = -1;
 			if(!checkMove(idx2, +indexChanger)) return;
 			swipe(puzzle[idx1][idx2], puzzle[idx1][idx2+indexChanger], indexChanger, LEFT);
 			break;
 			
-		case RIGHT:	case 4:
-			search("X");
+		case RIGHT:	case "4":
 			indexChanger = 1;
 			if(!checkMove(idx2, +indexChanger)) return;
 			swipe(puzzle[idx1][idx2], puzzle[idx1][idx2+indexChanger], indexChanger, RIGHT);
@@ -137,24 +138,21 @@ class Puzzle {
 		}
 	}
 	
-	public void swipe(String positionX,String positionOther, int change, int towhere) {
+	public void swipe(String positionX,String positionOther, int change, String towhere) {
 
 		//여기서 인덱스 값변경이 없음을 확인함
 		switch (towhere) {
-		case UP: case DOWN:
+		case "w": case DOWN:
 			puzzle[idx1][idx2] = positionOther;
 			puzzle[idx1+change][idx2] = positionX;
 			break;
 
-		case LEFT: case RIGHT:
+		case "a": case RIGHT:
 			puzzle[idx1][idx2] = positionOther;
 			puzzle[idx1][idx2+change] = positionX;
 			break;
 		}
-		
 	}
-	
-
 
 	
 	public void defaultSetPuzzle() {
@@ -185,12 +183,11 @@ class Puzzle {
 			if(input>=5||input==0)	i++;
 			else	{
 				checkSwitch = false;
-				this.input=input;
+				this.input=Integer.toString(input);
 				run();
 			}
 		}
 	}
-	
 }
  
 
