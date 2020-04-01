@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -11,7 +10,7 @@ import java.util.Scanner;
 
 public class puzzleMain {
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 
 		 new Puzzle().playGame();
 	}
