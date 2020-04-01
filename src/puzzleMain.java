@@ -21,25 +21,22 @@ class Puzzle {
 	final String LEFT = "a";
 	final String DOWN = "s";
 	final String RIGHT = "d";
-	final String RESTART = "r";
+	final String RESTART = "y";
 	final String EXIT = "e";
 	boolean checkSwitch;
 	
 	
-	public Puzzle()  {
-		playGame();
-	}
 	
 	public void playGame() {
 		
 		defaultSetPuzzle();
-		shuffle(5);
+		shuffle(100);
 		do {
 			updatePuzzle();
 			playGuidePrint();
 			scanVal();
 			run();
-			
+			resultCheck();
 		} while (true);
 	}
 
@@ -57,6 +54,28 @@ class Puzzle {
 		for( idx1=0; idx1<=2; idx1++)
 			for( idx2=0; idx2<=2 ; idx2++) 
 				if(puzzle[idx1][idx2].equals("X")) return;
+	}
+	public void resultCheck() {
+		
+		int val = 1;
+		for(int i=0 ; i<=2 ; i++) {
+			for(int j=0 ; j<=2 ; j++) {
+				if(val==9) {
+					if(puzzle[i][j].equals("X")) {
+						System.out.println("==^^정답입니다==");
+						updatePuzzle();
+						System.out.println("재시작하시겠습니까?(y 누르면 재시작, 나머지는 종료");
+						scanVal();
+						if(input=="y") shuffle(100);
+						else System.exit(0);
+					}
+				}
+				else if(!puzzle[i][j].equals(Integer.toString((val++)))) {
+					return;
+				}
+			}
+		}
+	
 	}
 	
 	public void updatePuzzle() {
@@ -126,7 +145,7 @@ class Puzzle {
 			break;
 			
 		case RESTART:
-			System.out.println("다시 시작합니다.");
+			System.err.println("다시 시작합니다.");
 			shuffle(30);
 			break;
 		case EXIT:
@@ -197,7 +216,7 @@ public class puzzleMain {
 	public static void main(String[] args) throws IOException {
 
 		
-		 new Puzzle();
+		 new Puzzle().playGame();
 		
 	      
 	}
