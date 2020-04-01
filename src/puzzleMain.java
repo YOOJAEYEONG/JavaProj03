@@ -2,14 +2,20 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
-
-
 /*
 1	2	3			0,0		0,1		0,2
 4	5	6			1,0		1,1		1,2
 7	8	X			2,0		2,1		2,2
 */
 
+
+public class puzzleMain {
+	
+	public static void main(String[] args) throws IOException {
+
+		 new Puzzle().playGame();
+	}
+}//////////////////////////////////////////////////////////
 
 class Puzzle {
 	
@@ -55,6 +61,7 @@ class Puzzle {
 			for( idx2=0; idx2<=2 ; idx2++) 
 				if(puzzle[idx1][idx2].equals("X")) return;
 	}
+
 	public void resultCheck() {
 		
 		int val = 1;
@@ -91,7 +98,7 @@ class Puzzle {
 	}
 	
 	public void playGuidePrint() {
-		System.out.print("   ▲w		r.재시작\n"
+		System.out.print("   ▲w		y.재시작\n"
 						+"◀a   d▶		  \n"
 						+"   ▼s		e.나가기\n");
 	}
@@ -144,7 +151,7 @@ class Puzzle {
 			swipe(puzzle[idx1][idx2], puzzle[idx1][idx2+indexChanger], indexChanger, RIGHT);
 			break;
 			
-		case RESTART:
+		case RESTART: 
 			System.err.println("다시 시작합니다.");
 			shuffle(30);
 			break;
@@ -172,7 +179,6 @@ class Puzzle {
 			break;
 		}
 	}
-
 	
 	public void defaultSetPuzzle() {
 		System.out.println("new Puzzle");
@@ -193,8 +199,7 @@ class Puzzle {
 		}
 		System.out.println("=======");
 	}
-	
-	
+		
 	public void shuffle(int shuffles) {
 
 		for(int i=shuffles ; i>=0 ; i--) {
@@ -210,17 +215,7 @@ class Puzzle {
 }
  
 
-public class puzzleMain {
 
-	
-	public static void main(String[] args) throws IOException {
 
-		
-		 new Puzzle().playGame();
-		
-	      
-	}
-	
 
-	
-}
+
