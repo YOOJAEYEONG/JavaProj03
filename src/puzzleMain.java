@@ -72,7 +72,7 @@ class Puzzle {
 						updatePuzzle();
 						System.out.println("재시작하시겠습니까?(y 누르면 재시작, 나머지는 종료");
 						scanVal();
-						if(input=="y") shuffle(100);
+						if(input.equals("y")) shuffle(100);
 						else System.exit(0);
 					}
 				}
@@ -133,7 +133,7 @@ class Puzzle {
 			break;
 			
 		case DOWN:	case "2":
-			indexChanger = 1;
+			indexChanger = +1;
 			if(!checkMove(idx1, indexChanger)) return;
 			swipe(puzzle[idx1][idx2], puzzle[idx1+indexChanger][idx2], indexChanger, DOWN);
 			break;
@@ -145,7 +145,7 @@ class Puzzle {
 			break;
 			
 		case RIGHT:	case "4":
-			indexChanger = 1;
+			indexChanger = +1;
 			if(!checkMove(idx2, +indexChanger)) return;
 			swipe(puzzle[idx1][idx2], puzzle[idx1][idx2+indexChanger], indexChanger, RIGHT);
 			break;
@@ -167,12 +167,12 @@ class Puzzle {
 
 		//여기서 인덱스 값변경이 없음을 확인함
 		switch (towhere) {
-		case "w": case DOWN:
+		case UP: case DOWN:
 			puzzle[idx1][idx2] = positionOther;
 			puzzle[idx1+change][idx2] = positionX;
 			break;
 
-		case "a": case RIGHT:
+		case LEFT: case RIGHT:
 			puzzle[idx1][idx2] = positionOther;
 			puzzle[idx1][idx2+change] = positionX;
 			break;
